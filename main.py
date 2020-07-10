@@ -47,13 +47,6 @@ def main():
 
   clock = pg.time.Clock()
 
-  def redrawGameWindow():
-    global run_count
-
-    window.blit(BG, (0,0))
-    pg.display.update()
-
-
 
   while run:
     clock.tick(FPS)
@@ -85,7 +78,6 @@ def main():
         jump_count = 10
         is_jump = False
 
-    redrawGameWindow()
 
 if __name__=='__main__':
   main()
