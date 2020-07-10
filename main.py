@@ -35,7 +35,7 @@ class Player:
     return self.player_img.get_height()
 
 def main():
-  run = True
+  running = True
   FPS = 60
   main_font = pg.font.SysFont('comicsans', 50)
   vel = 5
@@ -47,7 +47,7 @@ def main():
   clock = pg.time.Clock()
 
 
-  while run:
+  while running:
     clock.tick(FPS)
     window.blit(BG, (0, 0))
 
@@ -56,7 +56,7 @@ def main():
 
     for event in pg.event.get():
       if event.type == pg.QUIT:
-        run = False
+        running = False
 
 
     keys = pg.key.get_pressed()
