@@ -41,7 +41,6 @@ def main():
   vel = 5
   is_jump = False
   jump_count = 10
-  run_count = 0
 
   player = Player(100, 500)
 
