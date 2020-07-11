@@ -17,13 +17,28 @@ NINJARECT = NINJA.get_rect()
 BG = pg.transform.scale(pg.image.load(os.path.join('png', 'bg-forest.png')), win_size)
 
 
-class Player:
+class Player(pg.sprite.Sprite):
   def __init__(self, x, y):
+    super(Player, self).__init__()
     self.x = x
     self.y = y
     self.player_img = pg.transform.scale(NINJA, (200, 230))
-    self.run = [pg.image.load(os.path.join('png', f'Run__00{x}' + '.png')) for x in range(0,9)]
+#    self.run = [pg.image.load(os.path.join('png', f'Run__00{x}' + '.png')) for x in range(0,9)]
+
+    self.run = []
+    self.run.append(pg.image.load('png/Run__000.png'))
+    self.run.append(pg.image.load('png/Run__001.png'))
+    self.run.append(pg.image.load('png/Run__002.png'))
+    self.run.append(pg.image.load('png/Run__003.png'))
+    self.run.append(pg.image.load('png/Run__004.png'))
+    self.run.append(pg.image.load('png/Run__005.png'))
+    self.run.append(pg.image.load('png/Run__006.png'))
+    self.run.append(pg.image.load('png/Run__007.png'))
+    self.run.append(pg.image.load('png/Run__008.png'))
+    self.run.append(pg.image.load('png/Run__009.png'))
+
     self.rect = self.player_img.get_rect()
+    self.index = 0
 
   def draw(self, win):
     win.blit(self.player_img, (self.x, self.y))
@@ -34,6 +49,11 @@ class Player:
   def get_height(self):
     return self.player_img.get_height()
 
+  def update(self):
+    pass
+
+
+
 def main():
   running = True
   FPS = 60
@@ -41,8 +61,10 @@ def main():
   vel = 5
   is_jump = False
   jump_count = 10
+  run_count = 0
 
   player = Player(100, 500)
+  group = pg.sprite.Group(player)
 
   clock = pg.time.Clock()
 
