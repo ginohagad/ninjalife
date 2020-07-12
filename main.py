@@ -87,6 +87,8 @@ def main():
 
     if keys[pg.K_d] and player.x + vel + player.get_width() < WIDTH:
       player.x += vel
+      running = pg.image.load(player.run[run_count])
+      run_count = (run_count + 1) % len(player.run)
 
     if not is_jump:
       if keys[pg.K_SPACE]:
