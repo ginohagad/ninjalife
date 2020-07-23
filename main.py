@@ -14,7 +14,10 @@ pg.display.set_caption('Ninja Life')
 NINJA = pg.image.load(os.path.join('png', 'Attack__002.png'))
 NINJARECT = NINJA.get_rect()
 
-BG = pg.transform.scale(pg.image.load(os.path.join('png', 'bg-forest.png')), win_size)
+BG = pg.transform.scale(pg.image.load(os.path.join('png', 'bg-forest.png')), win_size).convert()
+bgX = 0
+bgX2 = BG.get_width()
+
 
 
 class Player(pg.sprite.Sprite):
@@ -79,7 +82,6 @@ def main():
     for event in pg.event.get():
       if event.type == pg.QUIT:
         running = False
-
 
     keys = pg.key.get_pressed()
     if keys[pg.K_a] and player.x - vel > 0:
