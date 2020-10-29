@@ -15,15 +15,7 @@ pg.display.set_caption('Ninja Life')
 NINJA = pg.image.load(os.path.join('png', 'Attack__000.png'))
 NINJARECT = NINJA.get_rect()
 
-<<<<<<< HEAD
-BG = pg.transform.scale(pg.image.load(os.path.join('png', 'bg-forest.png')), WIN_SIZE)
-=======
-BG = pg.transform.scale(pg.image.load(os.path.join('png', 'bg-forest.png')), win_size).convert()
-bgX = 0
-bgX2 = BG.get_width()
-
-
->>>>>>> b6cb4afcee916de9a8ebed9f887eb3fe90cfeca7
+BG = pg.transform.scale(pg.image.load(os.path.join('png', 'bg-forest.png')), WIN_SIZE).convert()
 
 class Player(pg.sprite.Sprite):
   def __init__(self, x, y):
