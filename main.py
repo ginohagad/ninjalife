@@ -37,8 +37,10 @@ class Player(pg.sprite.Sprite):
     self.run.append(pg.image.load('png/Run__009.png'))
 
     self.index = 0
-    self.player_img = self.run[self.index]
-    self.rect = self.player_img.get_rect()
+    self.player_img = pg.transform.scale(NINJA, (200, 230))
+    
+    # self.player_img = self.run[self.index]
+    # self.rect = self.player_img.get_rect()
 
 
   def draw(self, win):
@@ -51,11 +53,17 @@ class Player(pg.sprite.Sprite):
     return self.player_img.get_height()
 
   def update(self):
+    pass
+
+  def player_run(self):
     self.index += 1
     if self.index >= len(self.run):
       self.index = 0
-    self.player_img = self.run[self.index]
+    # self.player_img = self.run[self.index]
+    self.player_img = pg.transform.scale(self.run[self.index], (200, 230))
 
+  def player_stand(self):
+    self.player_img = pg.transform.scale(NINJA, (200, 230))
 
 
 def main():
@@ -84,14 +92,18 @@ def main():
       if event.type == pg.KEYDOWN:
         if (event.key == pg.K_ESCAPE) or (event.type == pg.QUIT):
           running = False
+      else:
+        player.player_stand()
 
 
     keys = pg.key.get_pressed()
     if keys[pg.K_a] and player.x - vel > 0:
       player.x -= vel
+      player.player_run()
 
     if keys[pg.K_d] and player.x + vel + player.get_width() < WIDTH:
       player.x += vel
+      player.player_run()
 
     if not is_jump:
       if keys[pg.K_SPACE]:
