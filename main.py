@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 
 import pygame as pg
+import sys
 import os
 import time
 
 pg.font.init()
 
-win_size = WIDTH, HEIGHT = 1040, 750
+WIN_SIZE= WIDTH, HEIGHT = 1040, 750
 
-window = pg.display.set_mode(win_size)
+WINDOW = pg.display.set_mode(WIN_SIZE)
 pg.display.set_caption('Ninja Life')
 
-NINJA = pg.image.load(os.path.join('png', 'Attack__002.png'))
+NINJA = pg.image.load(os.path.join('png', 'Attack__000.png'))
 NINJARECT = NINJA.get_rect()
 
-BG = pg.transform.scale(pg.image.load(os.path.join('png', 'bg-forest.png')), win_size)
-
+BG = pg.transform.scale(pg.image.load(os.path.join('png', 'bg-forest.png')), WIN_SIZE)
 
 class Player(pg.sprite.Sprite):
   def __init__(self, x, y):
@@ -23,7 +23,6 @@ class Player(pg.sprite.Sprite):
     self.x = x
     self.y = y
     self.player_img = pg.transform.scale(NINJA, (200, 230))
-#    self.run = [pg.image.load(os.path.join('png', f'Run__00{x}' + '.png')) for x in range(0,9)]
 
     self.run = []
     self.run.append(pg.image.load('png/Run__000.png'))
@@ -37,8 +36,10 @@ class Player(pg.sprite.Sprite):
     self.run.append(pg.image.load('png/Run__008.png'))
     self.run.append(pg.image.load('png/Run__009.png'))
 
-    self.rect = self.player_img.get_rect()
     self.index = 0
+    self.player_img = self.run[self.index]
+    self.rect = self.player_img.get_rect()
+
 
   def draw(self, win):
     win.blit(self.player_img, (self.x, self.y))
@@ -50,7 +51,10 @@ class Player(pg.sprite.Sprite):
     return self.player_img.get_height()
 
   def update(self):
-    pass
+    self.index += 1
+    if self.index >= len(self.run):
+      self.index = 0
+    self.player_img = self.run[self.index]
 
 
 
@@ -71,14 +75,15 @@ def main():
 
   while running:
     clock.tick(FPS)
-    window.blit(BG, (0, 0))
+    WINDOW.blit(BG, (0, 0))
 
-    player.draw(window)
+    player.draw(WINDOW)
     pg.display.update()
 
     for event in pg.event.get():
-      if event.type == pg.QUIT:
-        running = False
+      if event.type == pg.KEYDOWN:
+        if (event.key == pg.K_ESCAPE) or (event.type == pg.QUIT):
+          running = False
 
 
     keys = pg.key.get_pressed()
@@ -87,10 +92,6 @@ def main():
 
     if keys[pg.K_d] and player.x + vel + player.get_width() < WIDTH:
       player.x += vel
-      '''
-      running = pg.image.load(player.run[run_count])
-      run_count = (run_count + 1) % len(player.run)
-      '''
 
     if not is_jump:
       if keys[pg.K_SPACE]:
