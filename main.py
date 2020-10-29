@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import pygame as pg
-import sys
 import os
 import time
 
@@ -12,7 +11,7 @@ WIN_SIZE= WIDTH, HEIGHT = 1040, 750
 WINDOW = pg.display.set_mode(WIN_SIZE)
 pg.display.set_caption('Ninja Life')
 
-NINJA = pg.image.load(os.path.join('png', 'Attack__000.png'))
+NINJA = pg.image.load(os.path.join('png', 'Idle__000.png'))
 NINJARECT = NINJA.get_rect()
 
 BG = pg.transform.scale(pg.image.load(os.path.join('png', 'bg-forest.png')), WIN_SIZE).convert()
@@ -22,7 +21,9 @@ class Player(pg.sprite.Sprite):
     super(Player, self).__init__()
     self.x = x
     self.y = y
-    self.player_img = pg.transform.scale(NINJA, (200, 230))
+    self.idle_size = (130, 230)
+    self.run_size = (200, 230)
+    self.player_img = pg.transform.scale(NINJA, self.idle_size)
 
     self.run = []
     self.run.append(pg.image.load('png/Run__000.png'))
@@ -37,7 +38,7 @@ class Player(pg.sprite.Sprite):
     self.run.append(pg.image.load('png/Run__009.png'))
 
     self.index = 0
-    self.player_img = pg.transform.scale(NINJA, (200, 230))
+    self.player_img = pg.transform.scale(NINJA, self.idle_size)
     
     # self.player_img = self.run[self.index]
     # self.rect = self.player_img.get_rect()
@@ -60,10 +61,10 @@ class Player(pg.sprite.Sprite):
     if self.index >= len(self.run):
       self.index = 0
     # self.player_img = self.run[self.index]
-    self.player_img = pg.transform.scale(self.run[self.index], (200, 230))
+    self.player_img = pg.transform.scale(self.run[self.index], self.run_size)
 
   def player_stand(self):
-    self.player_img = pg.transform.scale(NINJA, (200, 230))
+    self.player_img = pg.transform.scale(NINJA, self.idle_size)
 
 
 def main():
