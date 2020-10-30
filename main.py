@@ -122,7 +122,6 @@ def main():
       player.player_run()
 
 
-
     if not is_jump:
       if keys[pg.K_SPACE]:
         is_jump = True
