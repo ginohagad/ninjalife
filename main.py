@@ -24,6 +24,7 @@ class Player(pg.sprite.Sprite):
     self.y = y
     self.idle_size = (130, 230)
     self.run_size = (200, 230)
+    self.attack_size = (300, 250)
     self.player_img = pg.transform.scale(NINJA, self.idle_size)
 
     self.run = []
@@ -37,6 +38,12 @@ class Player(pg.sprite.Sprite):
     self.run.append(pg.image.load('png/Run__007.png'))
     self.run.append(pg.image.load('png/Run__008.png'))
     self.run.append(pg.image.load('png/Run__009.png'))
+
+    self.attack = []
+    self.attack.append(pg.image.load('png/Attack__003.png'))
+    self.attack.append(pg.image.load('png/Attack__004.png'))
+    self.attack.append(pg.image.load('png/Attack__005.png'))
+
 
     self.index = 0
     self.player_img = pg.transform.scale(NINJA, self.idle_size)
@@ -67,6 +74,12 @@ class Player(pg.sprite.Sprite):
   def player_stand(self):
     self.player_img = pg.transform.scale(NINJA, self.idle_size)
 
+  def player_attack(self):
+    self.index += 1
+    if self.index >= len(self.attack):
+      self.index = 0
+    self.player_img = pg.transform.scale(self.attack[self.index], self.attack_size)
+
 
 def main():
   running = True
@@ -94,6 +107,8 @@ def main():
       if event.type == pg.KEYDOWN:
         if (event.key == pg.K_ESCAPE) or (event.type == pg.QUIT):
           running = False
+      elif event.type == pg.MOUSEBUTTONDOWN:
+        player.player_attack()
       else:
         player.player_stand()
 
@@ -105,6 +120,8 @@ def main():
     if keys[pg.K_d] and player.x + vel + player.get_width() < WIDTH:
       player.x += vel
       player.player_run()
+
+
 
     if not is_jump:
       if keys[pg.K_SPACE]:
