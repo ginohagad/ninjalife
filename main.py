@@ -4,6 +4,7 @@ import pygame as pg
 import os
 import time
 
+
 pg.font.init()
 
 WIN_SIZE= WIDTH, HEIGHT = 1040, 750
