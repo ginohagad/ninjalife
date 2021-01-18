@@ -12,7 +12,7 @@ WIN_SIZE= WIDTH, HEIGHT = 1040, 750
 WINDOW = pg.display.set_mode(WIN_SIZE)
 pg.display.set_caption('Ninja Life')
 
-NINJA = pg.image.load(os.path.join('png', 'Idle__000.png'))
+NINJA = pg.image.load(os.path.join('png', 'Idle__000.png')).convert_alpha()
 NINJARECT = NINJA.get_rect()
 
 BG = pg.transform.scale(pg.image.load(os.path.join('png', 'bg-forest.png')), WIN_SIZE).convert()
@@ -28,21 +28,21 @@ class Player(pg.sprite.Sprite):
     self.player_img = pg.transform.scale(NINJA, self.idle_size)
 
     self.run = []
-    self.run.append(pg.image.load('png/Run__000.png'))
-    self.run.append(pg.image.load('png/Run__001.png'))
-    self.run.append(pg.image.load('png/Run__002.png'))
-    self.run.append(pg.image.load('png/Run__003.png'))
-    self.run.append(pg.image.load('png/Run__004.png'))
-    self.run.append(pg.image.load('png/Run__005.png'))
-    self.run.append(pg.image.load('png/Run__006.png'))
-    self.run.append(pg.image.load('png/Run__007.png'))
-    self.run.append(pg.image.load('png/Run__008.png'))
-    self.run.append(pg.image.load('png/Run__009.png'))
+    self.run.append(pg.image.load('png/Run__000.png').convert_alpha())
+    self.run.append(pg.image.load('png/Run__001.png').convert_alpha())
+    self.run.append(pg.image.load('png/Run__002.png').convert_alpha())
+    self.run.append(pg.image.load('png/Run__003.png').convert_alpha())
+    self.run.append(pg.image.load('png/Run__004.png').convert_alpha())
+    self.run.append(pg.image.load('png/Run__005.png').convert_alpha())
+    self.run.append(pg.image.load('png/Run__006.png').convert_alpha())
+    self.run.append(pg.image.load('png/Run__007.png').convert_alpha())
+    self.run.append(pg.image.load('png/Run__008.png').convert_alpha())
+    self.run.append(pg.image.load('png/Run__009.png').convert_alpha())
 
     self.attack = []
-    self.attack.append(pg.image.load('png/Attack__003.png'))
-    self.attack.append(pg.image.load('png/Attack__004.png'))
-    self.attack.append(pg.image.load('png/Attack__005.png'))
+    self.attack.append(pg.image.load('png/Attack__003.png').convert_alpha())
+    self.attack.append(pg.image.load('png/Attack__004.png').convert_alpha())
+    self.attack.append(pg.image.load('png/Attack__005.png').convert_alpha())
 
 
     self.index = 0
